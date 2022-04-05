@@ -1,0 +1,8 @@
+name: env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - https://test.pypi.org/simple/ example-package-robert-rijnbeek
