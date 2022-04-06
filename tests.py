@@ -1,13 +1,12 @@
 import os,io, re
 
-def getPacketInitFileContent():
-    return io.open(
-            os.path.join('src', "robert_rijnbeek_package",'__init__.py'),
-            encoding='utf_8_sig'
-            ).read()
+def getconfigGIT():
+    with open(os.path.join(".git","config"), "r", encoding="utf-8") as fh:
+        return  fh.read()
 
-a = getPacketInitFileContent()
-print(a)
+a= getconfigGIT()
 
-print(re.search(r'(?<=\"\"\")((.|\n)*)(?=\"\"\")', a).group(1))
+b=re.search(r'(?<=\[remote "origin"\]\n\turl = )((.|\n)*)(?=\.git)', a).group(1)
 
+print(b)
+    
