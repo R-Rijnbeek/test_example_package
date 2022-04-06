@@ -4,7 +4,7 @@ import re, io, os
 
 class getPackageInfo:
     def __init__(self):
-        self._package_name = self.__getPackageNameFromProject()
+        self._package_module_name = self.__getPackageModuleNameFromProject()
         self._package_main_file = self.__getPacketInitFileContent()
         self._git_config_file = self.getconfigGIT()
         self._long_description = self.__getLongDescription()
@@ -13,10 +13,11 @@ class getPackageInfo:
         self._author = self.__getAuthor()
         self._author_email = self.__getAuthorEmail()
         self._git_host = self.__getGITHost()
+        self._package_name = self.__getPackageName()
         self._git_issues_host = self.__getGITIssuesHost()
 
 
-    def __getPackageNameFromProject(self):
+    def __getPackageModuleNameFromProject(self):
         for dir in next(os.walk(".\src"))[1]:
             if not ".egg-info" in str(dir):
                 return dir
@@ -28,11 +29,11 @@ class getPackageInfo:
 
     def __getPacketInitFileContent(self):
         return io.open(
-                os.path.join('src', self.package_name,'__init__.py'),
+                os.path.join('src', self._package_module_name,'__init__.py'),
                 encoding='utf_8_sig'
             ).read()
 
-    def getconfigGIT():
+    def getconfigGIT(self):
         with open(os.path.join(".git","config"), "r", encoding="utf-8") as fh:
             return  fh.read()
 
@@ -68,6 +69,9 @@ class getPackageInfo:
 
     def __getGITIssuesHost(self):
         return self._git_host + "/issues"
+
+    def __getPackageName(self):
+        return self._git_host.rsplit('/', 1)[-1]
 
     @property
     def package_name(self):
@@ -105,7 +109,7 @@ class getPackageInfo:
 PACKAGE_INFO = getPackageInfo()
 
 setup(
-    name = "example-package-robert-rijnbeek",
+    name = PACKAGE_INFO.package_name,
     version = PACKAGE_INFO.version,
     author = PACKAGE_INFO.author ,
     author_email = PACKAGE_INFO.author_email ,
