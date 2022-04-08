@@ -26,4 +26,4 @@ if not exist ".\.vscode\" mkdir .\.vscode
 
 python -m venv env
 call .\env\Scripts\activate
-pip install example-package-robert-rijnbeek
+pip install <YOUR_PACKAGE_NAME>

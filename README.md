@@ -14,16 +14,6 @@ $ git clone https://github.com/<GITHUB_USERNAME>/<REPOSITORY_NAME>.git
 ````
 $ cd <REPOSITORY_NAME>
 ````
-4. Build the virtual environment on the repository with the package content by running:
-````
-$ build.bat
-````
-5. Afther that you can use method located in the tests directory .\\tests\\__init__.py
-````
-$ cd tests
-$ python __init__.py
-````
-
 ## how deploy package on pipy
 
 1. Before execute the deploy command. There must be prerequisites:
@@ -51,3 +41,23 @@ $ deploy.bat
 * This command will create and temporary virtual environment. Install the requirement packages on it. Build the new release. And deploy it on https://pypi.org/ (will ask username and password) and as last will destroy the builded virtual environment asking if you will delete it or not. 
 
 Now you have deployed your package on PIPY so you can use it with PIP installations
+
+## How to test it (on VSCode):
+
+1. Change ``<YOUR_PACKAGE_NAME>`` your your deployed package name inside ``build.bat`` (on the last line)
+````
+...
+python -m venv env
+call .\env\Scripts\activate
+pip install <YOUR_PACKAGE_NAME>
+````
+
+2. Build the virtual environment on the repository with the package content by running:
+````
+$ build.bat
+````
+3. After that you can use method located in the tests directory .\\tests\\__init__.py
+````
+$ cd tests
+$ python __init__.py
+````
