@@ -4,7 +4,7 @@ robert_rijnbeek_package: Test package to use it as template for building other p
 """
 __author__  = "Robert Rijnbeek"
 __email__   = "robert270384@gmail.com"
-__version__ = "0.0.1"
+__version__ = "1.0.0"
 
 
 def helloWorld():
