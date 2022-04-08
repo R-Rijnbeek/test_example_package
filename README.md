@@ -1,4 +1,4 @@
-# example_package_robert_rijnbeek
+# <REPOSITORY_NAME>
 
 The function of this test package template is to make it easier to build and deploy new packages on https://pypi.org/ 
 It does not pretend to fit the demadnd of all type of packages but make some steps easier to fullfit using this package as template. And afther importing the repository. Adapt is for each usecase.
