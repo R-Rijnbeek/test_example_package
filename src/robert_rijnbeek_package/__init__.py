@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-__init__.py case for test package!!!!!!
+robert_rijnbeek_package: Test package to use it as template for building other packages
 """
 __author__  = "Robert Rijnbeek"
 __email__   = "robert270384@gmail.com"
-__version__ = "0.1.7"
+__version__ = "0.0.1"
 
 
-def holaVersion():
-    print(f"hola: {__version__}")
+def helloWorld():
+    print("helo world!!")
 
-
-
-def holaAuthor():
+def helloAuthor():
     print(f"hola: {__author__}")

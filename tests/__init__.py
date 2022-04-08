@@ -1,7 +1,14 @@
-from robert_rijnbeek_package.example import add_one, make_array
-from robert_rijnbeek_package import holaVersion
+from robert_rijnbeek_package.example import add_one 
+from robert_rijnbeek_package import helloAuthor, helloWorld
 
-a= make_array([2])
-print(a)
+digit = 1
+assert (add_one(digit) == digit + 1), f"Error in add_one() function"
+print(f"add_one() Pass succesfully\n")
 
-holaVersion()
+helloAuthor()
+print(f"helloAuthor() Pass succesfully\n")
+
+helloWorld()
+print(f"helloWorld() Pass succesfully\n")
+
+print("TEST OK!!")
