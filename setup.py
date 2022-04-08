@@ -1,8 +1,6 @@
 from setuptools import setup, find_packages
 
 import re, io, os
-
-import re, io, os
 class getPackageInfo:
     def __init__(self):
         self._package_module_name = None
@@ -16,9 +14,10 @@ class getPackageInfo:
         self._git_host = None
         self._package_name = None
         self._git_issues_host = None
-        self.Process()
+        self._required_packages = None
+        self.__Process()
     
-    def Process(self):
+    def __Process(self):
         self.__getPackageModuleNameFromProject()
         self.__getPacketInitFileContent()
         self.__getconfigGIT()
@@ -30,6 +29,18 @@ class getPackageInfo:
         self.__getGITHost()
         self.__getPackageName()
         self.__getGITIssuesHost()
+        self.__getRequiredPackageList()
+
+    def __getRequiredPackageList(self):
+        dependencies =[]
+        with open("requirements.txt", "r", encoding="utf-8") as fh:
+            lines = fh.readlines()
+            for line in lines:
+                cleanline = re.sub('\s+', '', line)
+                if (not cleanline == ""):
+                    dependencies.append(re.sub('\s+', '', line))
+        self._required_packages = dependencies
+        return True
 
     def __getPackageModuleNameFromProject(self):
         for dir in next(os.walk(".\src"))[1]:
@@ -129,6 +140,10 @@ class getPackageInfo:
     def git_issues_host(self):
         return self._git_issues_host
 
+    @property
+    def required_packages(self):
+        return self._required_packages
+
 
 PACKAGE_INFO = getPackageInfo()
 
@@ -144,10 +159,16 @@ setup(
     project_urls = {
         "Bug Tracker": PACKAGE_INFO.git_issues_host,
     },
-    data_files=[(
+    data_files=[
+        (
             '.git.',
             ['.git/config']
-        )],
+        ),
+        (
+            '.',
+            ["requirements.txt"]
+            )
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -156,5 +177,5 @@ setup(
     package_dir = { "": "src"},
     packages = find_packages(where = "src"),
     python_requires = ">=3.6",
-    install_requires=["numpy"]
+    install_requires=PACKAGE_INFO.required_packages
 )
